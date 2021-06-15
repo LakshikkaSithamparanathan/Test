@@ -73,11 +73,6 @@
 	<dependencies>
     <dependency>
       <groupId>org.eclipse.birt.runtime</groupId>
-       <artifactId>org.apache.batik.anim</artifactId>
-       <version>1.9.1.v20181015-1528</version>
-    </dependency>
-    <dependency>
-      <groupId>org.eclipse.birt.runtime</groupId>
        <artifactId>org.eclipse.equinox.frameworkadmin</artifactId>
        <version>2.1.200.v20190215-2242</version>
     </dependency>
