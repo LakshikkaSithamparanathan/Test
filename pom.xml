@@ -7,7 +7,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.birt.runtime</groupId>
 	<artifactId>org.eclipse.birt.runtime</artifactId>
-	<version>4.9.0-enactor1</version>
+	<version>4.9.0-20210614</version>
 
 	<properties>
 		<maven.compiler.source>10</maven.compiler.source>
