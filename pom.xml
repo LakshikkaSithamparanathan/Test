@@ -26,34 +26,36 @@
 	      <url>http://172.17.0.1:8081/repository/maven-releases</url>
 	    </repository>
   	</distributionManagement>
-  	
-  	<plugins>
-			<plugin>
-				  <groupId>org.codehaus.mojo</groupId>
-				  <artifactId>exec-maven-plugin</artifactId>
-				  <version>1.2.1</version>
-				  <executions>
-				    <execution>
-				      <goals>
-					<goal>java</goal>
-				      </goals>
-				    </execution>
-				  </executions>
-				  <configuration>
-				    <mainClass>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen/RepoGen.Main</mainClass>
-				  </configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<executions>
-				    <execution>
-				      <goals>
-					<goal>deploy</goal>
-				      </goals>
-				    </execution>
-				  </executions>
-			</plugin>	
-		</plugins>
-	
+  	<profiles>
+		<profile>
+  			<plugins>
+				<plugin>
+					  <groupId>org.codehaus.mojo</groupId>
+					  <artifactId>exec-maven-plugin</artifactId>
+					  <version>1.2.1</version>
+					  <executions>
+					    <execution>
+					      <goals>
+						<goal>java</goal>
+					      </goals>
+					    </execution>
+					  </executions>
+					  <configuration>
+					    <mainClass>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen/RepoGen.Main</mainClass>
+					  </configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<executions>
+					    <execution>
+					      <goals>
+						<goal>deploy</goal>
+					      </goals>
+					    </execution>
+					  </executions>
+				</plugin>	
+			</plugins>
+		</profile>
+	</profiles>
 </project>
