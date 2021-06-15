@@ -32,21 +32,22 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-deploy-plugin</artifactId>
 						<executions>
-					<execution>
-						<id>deploy-birt-jar</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy-file</goal>
-						</goals>
-						<configuration>
-							<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</file>
-							<repositoryId>${repository.id}</repositoryId>
-							<url>${repository.url}</url>
-							<groupId>org.eclipse.birt.runtime</groupId>
-							<artifactId>org.eclipse.birt.runtime</artifactId>
-							<version>${project.version}</version>
-						</configuration>
-					</execution>
+							<execution>
+								<id>deploy-birt-jar</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy-file</goal>
+								</goals>
+								<configuration>
+									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</file>
+									<repositoryId>${repository.id}</repositoryId>
+									<url>${repository.url}</url>
+									<groupId>org.eclipse.birt.runtime</groupId>
+									<artifactId>org.eclipse.birt.runtime</artifactId>
+									<version>${project.version}</version>
+								</configuration>
+							</execution>
+						</executions>
 					</plugin>	
 				</plugins>
 			</build>
