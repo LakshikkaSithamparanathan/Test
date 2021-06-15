@@ -4,7 +4,10 @@
 	Eclipse Public License 2.0 which is available at https://www.eclipse.org/legal/epl-2.0/. 
 	SPDX-License-Identifier: EPL-2.0 -->
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.eclipse.birt.runtime</groupId>
+	<artifactId>org.eclipse.birt.runtime</artifactId>
+	<version>4.9.0</version>
 	<properties>
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
@@ -26,30 +29,25 @@
 			<build>
 				<plugins>
 					<plugin>
-						  <groupId>org.codehaus.mojo</groupId>
-						  <artifactId>exec-maven-plugin</artifactId>
-						  <version>1.2.1</version>
-						  <executions>
-						    <execution>
-						      <goals>
-							<goal>java</goal>
-						      </goals>
-						    </execution>
-						  </executions>
-						  <configuration>
-						    <mainClass>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/org.eclipse.birt.build/src/org/eclipse/birt/build/mavenrepogen/RepoGen.Main</mainClass>
-						  </configuration>
-					</plugin>
-					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-deploy-plugin</artifactId>
 						<executions>
-						    <execution>
-						      <goals>
-							<goal>deploy</goal>
-						      </goals>
-						    </execution>
-						  </executions>
+					<execution>
+						<id>deploy-birt-jar</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy-file</goal>
+						</goals>
+						<configuration>
+							<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</file>
+							<repositoryId>${repository.id}</repositoryId>
+							<url>${repository.url}</url>
+							<groupId>org.eclipse.birt.runtime</groupId>
+							<artifactId>org.eclipse.birt.runtime</artifactId>
+							<version>${project.version}</version>
+						</configuration>
+					</execution>
+					<execution>
 					</plugin>	
 				</plugins>
 			</build>
