@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2015, 2021 Eclipse BIRT contributors and others This program 
+	and the accompanying materials are made available under the terms of the 
+	Eclipse Public License 2.0 which is available at https://www.eclipse.org/legal/epl-2.0/. 
+	SPDX-License-Identifier: EPL-2.0 -->
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.lakshi.birt</groupId>
+	<artifactId>runtime</artifactId>
+	<version>4.9.0-enactor1</version>
+
+	<properties>
+		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+		<repository.url>http://172.17.0.1:8081/repository/maven-releases/</repository.url>
+		<repository.id>nexus</repository.id>
+		<skip.deploy>true</skip.deploy>
+	</properties>
+	
+	<distributionManagement>
+	    <snapshotRepository>
+	      <id>nexus</id>
+	      <url>http://172.17.0.1:8081/repository/maven-snapshots/</url>
+	    </snapshotRepository>
+	    <repository>
+	      <id>nexus</id>
+	      <url>http://172.17.0.1:8081/repository/maven-releases/</url>
+	    </repository>
+  	</distributionManagement>
+  	
+  	<profiles>
+  		<profile>
+  			<id>generate-birt</id>
+		  	<build>
+			  	<plugins>
+				  	<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<configuration>
+							<skip>${skip.deploy}</skip>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy-birt-jar</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy-file</goal>
+								</goals>
+								<configuration>
+									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime/org.eclipse.birt.runtime/4.9.0-20210614/org.eclipse.birt.runtime-4.9.0-20210614.jar</file>
+									<repositoryId>${repository.id}</repositoryId>
+									<url>${repository.url}</url>
+									<groupId>com.lakshi.birt</groupId>
+									<artifactId>runtime</artifactId>
+									<version>${project.version}</version>
+									<packaging>jar</packaging>
+								</configuration>
+							</execution>
+							<execution>
+								<id>deploy-birt-pom</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy-file</goal>
+								</goals>
+								<configuration>
+									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime/org.eclipse.birt.runtime/4.9.0-20210614/org.eclipse.birt.runtime-4.9.0-20210614.pom</file>
+									<repositoryId>${repository.id}</repositoryId>
+									<url>${repository.url}</url>
+									<groupId>com.lakshi.birt</groupId>
+									<artifactId>runtime</artifactId>
+									<version>${project.version}</version>
+									<packaging>pom</packaging>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>	
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
