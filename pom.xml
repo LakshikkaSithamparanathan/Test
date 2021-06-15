@@ -93,7 +93,7 @@
 								<id>deploy-birt-jar</id>
 								<phase>deploy</phase>
 								<goals>
-									<goal>deploy-file</goal>
+									<goal>deploy</goal>
 								</goals>
 								<configuration>
 									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime/org.eclipse.birt.runtime/4.9.0-20210614/org.eclipse.birt.runtime-4.9.0-20210614.jar</file>
@@ -109,7 +109,7 @@
 								<id>deploy-birt-pom</id>
 								<phase>deploy</phase>
 								<goals>
-									<goal>deploy-file</goal>
+									<goal>deploy</goal>
 								</goals>
 								<configuration>
 									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime/org.eclipse.birt.runtime/4.9.0-20210614/org.eclipse.birt.runtime-4.9.0-20210614.pom</file>
