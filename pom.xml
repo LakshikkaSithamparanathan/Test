@@ -12,8 +12,8 @@
 	<properties>
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
-		<repository.url>http://172.17.0.1:8081/repository/maven-releases/</repository.url>
-		<repository.id>nexus-user-credentials</repository.id>
+		<repository.url>http://172.17.0.1:8081/repository/maven-nexus-repo/</repository.url>
+		<repository.id>nexus</repository.id>
 		<skip.deploy>true</skip.deploy>
 	</properties>
 	
