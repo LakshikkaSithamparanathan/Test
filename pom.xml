@@ -5,10 +5,19 @@
 	SPDX-License-Identifier: EPL-2.0 -->
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.eclipse.birt.runtime</groupId>
-	<artifactId>org.eclipse.birt.runtime</artifactId>
+	<groupId>org.lakshi.core</groupId>
+	<artifactId>runtime</artifactId>
 	<version>4.9.0</version>
+	<packaging>jar</packaging>
 	<properties>
+		 <deploy.basefolder>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</deploy.basefolder>
+
+		<!-- This will be used as groupId -->
+		<deploy.groupId>org.eclipse.birt.runtime</deploy.groupId>
+
+		<!-- this will be used as version -->
+		<deploy.version>1.0.0</deploy.version>
+		
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
 		<repository.url>http://172.17.0.1:8081/repository/maven-releases/</repository.url>
@@ -25,31 +34,101 @@
 	      <url>http://172.17.0.1:8081/repository/maven-releases</url>
 	    </repository>
   	</distributionManagement>
-  
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-deploy-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>deploy-birt-jar</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>deploy-file</goal>
-								</goals>
-								<configuration>
-									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</file>
-									<repositoryId>${repository.id}</repositoryId>
-									<url>${repository.url}</url>
-									<groupId>org.eclipse.birt.runtime</groupId>
-									<artifactId>org.eclipse.birt.runtime</artifactId>
-									<version>${project.version}</version>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>	
-				</plugins>
-			</build>
+	
+	<build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.codehaus.groovy.maven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <version>1.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                        <version>1.4</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>deploy-files</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <source>
+                            <![CDATA[
+				// read components from plexus container
+				def layout = session.lookup(
+				    'org.apache.maven.artifact.repository.layout.ArtifactRepositoryLayout');
+				def repoFactory = session.lookup(
+				    'org.apache.maven.artifact.repository.ArtifactRepositoryFactory');
+				def repository = repoFactory.createDeploymentArtifactRepository(
+				    pom.distributionManagement.repository.id,
+				    pom.distributionManagement.repository.url,
+				    layout, true );
+				def localRepository = session.localRepository;
+				def helper =
+				    session.lookup("org.apache.maven.project.MavenProjectHelper");
+				def afm = session.lookup(
+				    'org.apache.maven.artifact.handler.manager.ArtifactHandlerManager');
+				def factory = new org.apache.maven.artifact.factory.DefaultArtifactFactory();
+				factory.class.getDeclaredField("artifactHandlerManager").accessible = true;
+				factory.artifactHandlerManager=afm;
+
+				def deployer = session.lookup(
+				    'org.apache.maven.artifact.deployer.ArtifactDeployer');
+
+				// initialize properties
+				def baseFolder = new File(pom.properties['deploy.basefolder']);
+				def groupId = pom.properties['deploy.groupId'];
+				def version = pom.properties['deploy.version'];
+
+				// iterate over all files recursively
+				baseFolder.eachFileRecurse{
+				    if(it.isDirectory())return;
+
+				    // packaging = file.extension
+				    def packaging = it.name.replaceAll( /.+\./ , '' );
+				    // artifactId = file.relativePath.replace '/' , '-'
+				    def artifactId = it.absolutePath
+					.replace(baseFolder.absolutePath, '')
+					.substring(1)
+					.replaceFirst( /\..*?$/ , '')
+					.replaceAll( /\W+/ , '-' );
+				    def artifact =
+					factory.createBuildArtifact(
+					    groupId, artifactId, version, packaging );
+
+				    // create pom for artifact
+				    def model = new org.apache.maven.model.Model();
+				    model.setModelVersion( "4.0.0" );
+				    model.setGroupId( groupId );
+				    model.setArtifactId( artifactId );
+				    model.setVersion( version );
+				    model.setPackaging( packaging );
+				    File pomFile = File.createTempFile( "mvndeploy", ".pom" );
+				    pomFile.deleteOnExit();
+				    fw = org.codehaus.plexus.util.WriterFactory.newXmlWriter( pomFile );
+				    new org.apache.maven.model.io.xpp3.MavenXpp3Writer().write( fw, model );
+				    org.apache.commons.io.IOUtils.closeQuietly( fw );
+
+				    def metadata =
+					new org.apache.maven.project.artifact.ProjectArtifactMetadata(
+						    artifact, pomFile );
+				    artifact.addMetadata( metadata );
+
+				    // deploy file
+				    deployer.deploy(it, artifact, repository, localRepository );
+				}
+                                    ]]>
+                            </source>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
