@@ -12,7 +12,7 @@
 	<properties>
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
-		<repository.url>http://172.17.0.1:8081/repository/maven-nexus-repo/</repository.url>
+		<repository.url>http://172.17.0.1:8081/repository/maven-releases/</repository.url>
 		<repository.id>nexus</repository.id>
 	</properties>
 	
@@ -23,7 +23,7 @@
 	    </snapshotRepository>
 	    <repository>
 	      <id>nexus</id>
-	      <url>http://172.17.0.1:8081/repository//maven-nexus-repo</url>
+	      <url>http://172.17.0.1:8081/repository/maven-releases</url>
 	    </repository>
   	</distributionManagement>
   	
