@@ -85,9 +85,6 @@
 				  	<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-deploy-plugin</artifactId>
-						<configuration>
-							<skip>${skip.deploy}</skip>
-						</configuration>
 						<executions>
 							<execution>
 								<id>deploy-birt-jar</id>
