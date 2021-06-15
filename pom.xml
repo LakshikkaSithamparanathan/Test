@@ -5,8 +5,8 @@
 	SPDX-License-Identifier: EPL-2.0 -->
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.lakshi.birt</groupId>
-	<artifactId>runtime-birt</artifactId>
+	<groupId>org.eclipse.birt.runtime</groupId>
+	<artifactId>org.eclipse.birt.runtime</artifactId>
 	<version>4.9.0-enactor1</version>
 
 	<properties>
@@ -44,8 +44,8 @@
 							<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime/org.eclipse.birt.runtime/4.9.0-20210614/org.eclipse.birt.runtime-4.9.0-20210614.jar</file>
 							<repositoryId>${repository.id}</repositoryId>
 							<url>${repository.url}</url>
-							<groupId>com.lakshi.birt</groupId>
-							<artifactId>runtime</artifactId>
+							<groupId>org.eclipse.birt.runtime</groupId>
+							<artifactId>org.eclipse.birt.runtime</artifactId>
 							<version>${project.version}</version>
 							<packaging>jar</packaging>
 						</configuration>
@@ -60,8 +60,8 @@
 							<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime/org.eclipse.birt.runtime/4.9.0-20210614/org.eclipse.birt.runtime-4.9.0-20210614.pom</file>
 							<repositoryId>${repository.id}</repositoryId>
 							<url>${repository.url}</url>
-							<groupId>com.lakshi.birt</groupId>
-							<artifactId>runtime</artifactId>
+							<groupId>org.eclipse.birt.runtime</groupId>
+							<artifactId>org.eclipse.birt.runtime</artifactId>
 							<version>${project.version}</version>
 							<packaging>pom</packaging>
 						</configuration>
