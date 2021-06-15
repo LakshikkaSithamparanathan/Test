@@ -47,7 +47,6 @@
 							<version>${project.version}</version>
 						</configuration>
 					</execution>
-					<execution>
 					</plugin>	
 				</plugins>
 			</build>
