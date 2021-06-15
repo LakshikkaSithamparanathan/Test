@@ -39,13 +39,10 @@
         <plugins>
 
             <plugin>
-                
-                <dependencies>
-			<dependency>
-			    <groupId>org.codehaus.gmaven</groupId>
-			    <artifactId>gmaven-plugin</artifactId>
-			    <version>1.4</version>
-			</dependency>
+           	    <groupId>org.codehaus.gmaven</groupId>
+		    <artifactId>gmaven-plugin</artifactId>
+		    <version>1.4</version>
+		   <dependencies>
                     <dependency>
                         <groupId>commons-io</groupId>
                         <artifactId>commons-io</artifactId>
