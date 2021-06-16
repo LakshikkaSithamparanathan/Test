@@ -59,6 +59,7 @@
             <fromDir>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</fromDir>
             <includes>*</includes>
 	    <excludes>*.xml</excludes>
+	    <excludes>*.sh</excludes>
 	    <target>${project.distributionManagement.repository.url}</target>
             <targetId>${project.distributionManagement.repository.id}</targetId> 
 	    <url>http://172.17.0.1:8081/repository/maven-releases/org/eclipse/birt/runtime</url>
