@@ -61,6 +61,7 @@
 	    <target>${project.distributionManagement.repository.url}</target>
             <targetId>${project.distributionManagement.repository.id}</targetId> 
             <url>${project.distributionManagement.repository.url}</url>
+	    <serverId>${project.distributionManagement.repository.id}</serverId>
 	</configuration>
           </execution>
         </executions>
