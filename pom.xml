@@ -56,7 +56,7 @@
             <goal>upload</goal>
           </goals>
           <configuration>
-            <fromDir>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</fromDir>
+            <fromDir>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/ReportEngine/lib</fromDir>
             <includes>*</includes>
 	    <excludes>*.xml</excludes>
 	    <excludes>*.sh</excludes>
