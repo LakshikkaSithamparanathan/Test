@@ -63,13 +63,15 @@
 	    <target>${project.distributionManagement.repository.url}</target>
             <targetId>${project.distributionManagement.repository.id}</targetId> 
 	    <url>http://172.17.0.1:8081/repository/maven-releases/org/eclipse/birt/runtime</url>
-	    <serverId>nexus</serverId>
+	    <repositoryId>nexus</repositoryId>
 	</configuration>
           </execution>
         </executions>
         </plugin>
 		</plugins>
     </build>
+	
+	
 
 
 </project>
