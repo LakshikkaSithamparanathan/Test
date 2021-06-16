@@ -36,40 +36,30 @@
   	</distributionManagement>
 	
 	<build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh</artifactId>
-        <version>1.0-beta-6</version>
-      </extension>
-    </extensions>  
-    <plugins>   
-    <plugin>
-      <groupId>org.codehaus.mojo</groupId>
-      <artifactId>wagon-maven-plugin</artifactId>
-      <version>1.0-beta-3</version>
-      <executions>
-        <execution>
-          <id>upload-dir</id>
-          <phase>deploy</phase>
-          <goals>
-            <goal>upload</goal>
-          </goals>
-          <configuration>
-            <fromDir>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/ReportEngine/lib</fromDir>
-            <includes>*</includes>
-	    <excludes>*.xml</excludes>
-	    <excludes>*.sh</excludes>
-	    <target>${project.distributionManagement.repository.url}</target>
-            <targetId>${project.distributionManagement.repository.id}</targetId> 
-	    <url>http://172.17.0.1:8082/repository/maven-releases/org/eclipse/birt/runtime</url>
-	    <repositoryId>nexus</repositoryId>
-	</configuration>
-          </execution>
-        </executions>
-        </plugin>
-		</plugins>
-    </build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>deploy-birt-jar</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy-file</goal>
+								</goals>
+								<configuration>
+									<file>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/birt.zip</file>
+									<repositoryId>${repository.id}</repositoryId>
+									<url>${repository.url}</url>
+									<groupId>org.eclipse.birt.runtime</groupId>
+									<artifactId>org.eclipse.birt.runtime</artifactId>
+									<version>${project.version}</version>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>	
+				</plugins>
+			</build>
 	
 	
 
