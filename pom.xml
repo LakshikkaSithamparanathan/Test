@@ -20,18 +20,18 @@
 		
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
-		<repository.url>http://172.17.0.1:8081/repository/maven-releases/</repository.url>
+		<repository.url>http://172.17.0.1:8082/repository/maven-releases/</repository.url>
 		<repository.id>nexus</repository.id>
 	</properties>
 	
 	<distributionManagement>
 	    <snapshotRepository>
 	      <id>nexus</id>
-	      <url>http://172.17.0.1:8081/repository/maven-snapshots/</url>
+	      <url>http://172.17.0.1:8082/repository/maven-snapshots/</url>
 	    </snapshotRepository>
 	    <repository>
 	      <id>nexus</id>
-	      <url>http://172.17.0.1:8081/repository/maven-releases</url>
+	      <url>http://172.17.0.1:8082/repository/maven-releases</url>
 	    </repository>
   	</distributionManagement>
 	
@@ -62,7 +62,7 @@
 	    <excludes>*.sh</excludes>
 	    <target>${project.distributionManagement.repository.url}</target>
             <targetId>${project.distributionManagement.repository.id}</targetId> 
-	    <url>http://172.17.0.1:8081/repository/maven-releases/org/eclipse/birt/runtime</url>
+	    <url>http://172.17.0.1:8082/repository/maven-releases/org/eclipse/birt/runtime</url>
 	    <repositoryId>nexus</repositoryId>
 	</configuration>
           </execution>
