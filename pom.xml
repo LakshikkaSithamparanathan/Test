@@ -57,7 +57,7 @@
           </goals>
           <configuration>
             <fromDir>/var/jenkins_home/workspace/release-customer-extension-artifacts/build/birt-packages/birt-runtime/target/mavenrepo/repository/org.eclipse.birt.runtime</fromDir>
-            <includes>*</include>
+            <includes>*</includes>
 		<target>${project.distributionManagement.repository.url}</target>
          	 <targetId>${project.distributionManagement.repository.id}</targetId>         
 	</configuration>
